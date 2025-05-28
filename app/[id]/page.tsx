@@ -43,7 +43,7 @@ export default function CountryPage() {
       </div>
       <div className="flex flex-col md:flex-row gap-[15%] items-center">
         <Image
-          className="h-[30vh] w-[80vw]  lg:h-[40vh] lg:w-[40vw]"
+          className="h-[30vh] w-[80vw]  lg:h-[40vh] lg:w-[30vw]"
           src={flag}
           width={600}
           height={600}
