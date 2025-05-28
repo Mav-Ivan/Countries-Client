@@ -1,4 +1,6 @@
 import useSWR from "swr";
+import { ClipLoader } from "react-spinners";
+
 import { fetcher } from "@/lib/utils";
 import { Regions } from "@/types/Regions.interface";
 
@@ -8,13 +10,10 @@ interface SelectProps {
 }
 
 export default function Select({ setFilter, currentRegion }: SelectProps) {
-  const { error, data, isLoading } = useSWR(
-    "/regions",
-    fetcher
-  );
+  const { error, data, isLoading } = useSWR("/regions", fetcher);
 
   if (isLoading) {
-    return <h3>Loading...</h3>;
+    return <ClipLoader size={30} color="#4A90E2" />;
   }
 
   if (error) {

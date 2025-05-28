@@ -1,16 +1,17 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { ClipLoader } from "react-spinners";
 
 import CardsContainer from "@/components/CardsContainer";
 import FilterBlock from "@/components/FilterBlock";
 import Pagination from "@/components/Pagination";
 
 import { fetcher } from "@/lib/utils";
-import Loading from "./loading";
 import { Country } from "@/types/Country.interface";
 import { useDebounce } from "@/hooks/useDebounce";
+import Loading from "./loading";
 
 interface CountriesApiResponse {
   data: Country[];
@@ -42,25 +43,21 @@ export default function Home() {
     dedupingInterval: 0,
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   if (error) {
     throw new Error(error);
   }
 
+  const content = isLoading ? <Loading /> : <CardsContainer countries={data?.data || []} />;
+
   return (
-    <main className="flex flex-col items-center justify-start min-h-screen p-10 bg-[#fafafa] text-black dark:bg-[#222d37] dark:text-white">
+    <main className="flex flex-col items-center justify-start min-h-[90vh] md:min-h-[85vh] p-10 bg-[#fafafa] text-black dark:bg-[#222d37] dark:text-white">
       <FilterBlock
         onSearchChange={setSearchQuery}
         onRegionChange={setSelectedRegion}
         currentRegion={selectedRegion}
         searchQuery={searchQuery}
       />
-      <Suspense fallback={<Loading />}>
-        <CardsContainer countries={data?.data || []} />
-      </Suspense>
+      {content}
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

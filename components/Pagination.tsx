@@ -28,7 +28,7 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }: 
     }
   };
 
-  if (totalPages === 0) {
+  if (totalPages <= 1) {
     return null;
   }
 

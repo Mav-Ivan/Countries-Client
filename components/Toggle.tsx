@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { ClipLoader } from "react-spinners";
+
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 
 export function Toggle() {
   const { theme, setTheme } = useTheme();
@@ -19,7 +21,7 @@ export function Toggle() {
   }, []);
 
   if (!mounted) {
-    return <p>Loading...</p>;
+    return <ClipLoader size={30} color="#4A90E2" />;
   }
 
   const icon =
