@@ -2,7 +2,6 @@
 
 import useSWR from "swr";
 import { useEffect, useState, useMemo } from "react";
-import { ClipLoader } from "react-spinners";
 
 import CardsContainer from "@/components/CardsContainer";
 import FilterBlock from "@/components/FilterBlock";
